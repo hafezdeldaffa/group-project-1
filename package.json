@@ -1,0 +1,16 @@
+{
+  "name": "group-project-stage1",
+  "version": "1.0.0",
+  "main": "indonesia.js",
+  "dependencies": {
+    "cross-fetch": "^3.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
