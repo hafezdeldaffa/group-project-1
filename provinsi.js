@@ -1,19 +1,52 @@
-const fetch = require('cross-fetch');
+const getApi = async () => {
+  try {
+    const posts = await fetch('https://api.kawalcorona.com/indonesia/provinsi');
+    return posts.json();
+  } catch (error) {
+    console.log('getPosts', error);
+    throw error;
+  }
+};
 
-async function getApi() {
-  fetch('https://api.kawalcorona.com/indonesia/provinsi')
-    .then((res) => {
-      if (res.status >= 400) {
-        throw new Error('Bad response from server');
-      }
-      return res.json();
-    })
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+const table = document.getElementById("table")
+
+const renderData = async () => {
+  const getData = await getApi();
+  const data = Object.entries(getData);
+  let i = 0;
+
+  //Thead
+  table.insertAdjacentHTML(
+    'beforeend',
+    `<thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Provinsi</th>
+      <th scope="col">Meninggal</th>
+      <th scope="col">Positif</th>
+      <th scope="col">Sembuh</th>
+    </tr>
+  </thead>`
+  )
+
+  data.forEach(element => {
+    i = i + 1
+    console.log(element)
+    createElement(element,i)
+  });
 }
 
-getApi();
+renderData()
+
+const createElement = (element,i) =>{
+  table.insertAdjacentHTML(
+    'beforeend',
+    `<tr>
+    <th scope="row">${i}</th>
+    <td>${element[1].attributes.Provinsi}</td>
+    <td>${element[1].attributes.Kasus_Meni}</td>
+    <td>${element[1].attributes.Kasus_Posi}</td>
+    <td>${element[1].attributes.Kasus_Semb}</td>
+  </tr>`
+  )
+}

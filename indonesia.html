@@ -17,18 +17,19 @@
 
     <title>Hello, world!</title>
   </head>
-  <body>
-    <div class="container px-4 py-5" id="hanging-icons">
-      <h2 class="pb-2 border-bottom">Covid - 19 Monitoring</h2>
-      <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-        <div class="col d-flex align-items-start">
-          <div>
-            <h2>Data Indonesia</h2>
-            <p id="positif">Positif :</p>
-            <p id="sembuh">Sembuh :</p>
-            <p id="meninggal">Meninggal :</p>
-          </div>
-        </div>
+  <nav class="navbar navbar-light bg-light shadow">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        <img src="asset/n.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+        Neimo
+      </a>
+    </div>
+  </nav>
+
+
+    <div class="container">
+      <div id="title"></div>
+      <div id="card" class="row row-cols-md-2 row-cols-1 row-cols-sm-1 gy-3">
       </div>
     </div>
 
@@ -40,6 +41,7 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <script type="module" src="./indonesia.js"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
