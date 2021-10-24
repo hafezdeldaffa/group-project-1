@@ -1,6 +1,7 @@
 const getApiIndonesia = async () => {
   try {
     const posts = await fetch('https://api.kawalcorona.com/indonesia');
+    preload.innerHTML = '';
     return posts.json();
   } catch (error) {
     console.log('getPosts', error);
@@ -8,26 +9,52 @@ const getApiIndonesia = async () => {
   }
 };
 
-const getApiGlobal = async () => {
+const getApiProvince = async () => {
   try {
-    const posts = await fetch('https://api.kawalcorona.com/positif');
+    const posts = await fetch('https://api.kawalcorona.com/indonesia/provinsi');
     return posts.json();
   } catch (error) {
     console.log('getPosts', error);
     throw error;
   }
 };
-
 
 const renderData = async () => {
   const getDataIndo = await getApiIndonesia();
   const data = Object.entries(getDataIndo[0]);
 
-  const getDataGlobal = await getApiGlobal();
-  console.log(getDataGlobal)
+  const getDataProvince = await getApiProvince();
+  console.log(getDataProvince)
+  const dataProvince = Object.entries(getDataProvince);
+  let i = 0;
+
+  //title table
+  titleTable.insertAdjacentHTML(
+    'beforeend',
+    `<h1 class="my-4">Data Setiap Provinsi</h1>`
+  )
+
+  //Thead table
+  table.insertAdjacentHTML(
+    'beforeend',
+    `<thead class="table-secondary">
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Provinsi</th>
+      <th scope="col">Meninggal</th>
+      <th scope="col">Positif</th>
+      <th scope="col">Sembuh</th>
+    </tr>
+  </thead>`
+  )
 
   data.forEach(element => {
     createElement(element)
+  });
+
+  dataProvince.forEach(element => {
+    i = i + 1
+    createElementProvince(element,i)
   });
 }
 
@@ -35,7 +62,10 @@ renderData()
 
 const card = document.getElementById("card")
 const title = document.getElementById("title")
-console.log(card)
+const titleTable = document.getElementById("titleTable")
+const table = document.getElementById("table")
+const preload = document.getElementById("preload")
+
 const createElement = (element) =>{
 
   if(element[0] === "name"){
@@ -57,6 +87,18 @@ const createElement = (element) =>{
     )
   }
   
+}
 
-  
+const createElementProvince = (element,i) =>{
+
+  table.insertAdjacentHTML(
+    'beforeend',
+    `<tr>
+    <th scope="row">${i}</th>
+    <td>${element[1].attributes.Provinsi}</td>
+    <td>${element[1].attributes.Kasus_Meni}</td>
+    <td>${element[1].attributes.Kasus_Posi}</td>
+    <td>${element[1].attributes.Kasus_Semb}</td>
+  </tr>`
+  )
 }
