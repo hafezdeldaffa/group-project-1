@@ -39,11 +39,11 @@ const getApiGlobal = async () => {
   }
 };
 
-const table = document.getElementById("table")
-const title = document.getElementById("title")
-const titleTable = document.getElementById("titleTable")
-const card = document.getElementById("card")
-const preload = document.getElementById("preload")
+const table = document.getElementById('table');
+const title = document.getElementById('title');
+const titleTable = document.getElementById('titleTable');
+const card = document.getElementById('card');
+const preload = document.getElementById('preload');
 
 const renderData = async () => {
   const dataPositive = await getApiPositive();
@@ -52,21 +52,18 @@ const renderData = async () => {
   const dataGlobal = await getApiGlobal();
   let i = 0;
 
-  const data = [dataPositive, dataNegatif, dataDeath]
-  
-  data.forEach(element =>{
-    createElement(element);
-  })
+  const data = [dataPositive, dataNegatif, dataDeath];
 
-  title.insertAdjacentHTML(
-    'beforeend',
-    `<h1 class="my-4">Data Global</h1>`
-  )
+  data.forEach((element) => {
+    createElement(element);
+  });
+
+  title.insertAdjacentHTML('beforeend', `<h1 class="my-4">Data Global</h1>`);
 
   titleTable.insertAdjacentHTML(
     'beforeend',
     `<h1 class="my-4">Data Setiap Negara</h1>`
-  )
+  );
 
   table.insertAdjacentHTML(
     'beforeend',
@@ -79,17 +76,17 @@ const renderData = async () => {
       <th scope="col">Sembuh</th>
     </tr>
   </thead>`
-  )
+  );
 
-  dataGlobal.forEach(element =>{
-    i=i+1
-    createElementGlobal(element,i)
-  })
-}
+  dataGlobal.forEach((element) => {
+    i = i + 1;
+    createElementGlobal(element, i);
+  });
+};
 
-renderData()
+renderData();
 
-const createElement = (element) =>{
+const createElement = (element) => {
   card.insertAdjacentHTML(
     'beforeend',
     `<div class="col">
@@ -100,11 +97,11 @@ const createElement = (element) =>{
       </div>
     </div>
   </div>`
-  )
-}
+  );
+};
 
-const createElementGlobal = (element,i) =>{
-  console.log(element)
+const createElementGlobal = (element, i) => {
+  console.log(element);
   table.insertAdjacentHTML(
     'beforeend',
     `<tr>
@@ -114,5 +111,5 @@ const createElementGlobal = (element,i) =>{
     <td>${element.attributes.Deaths}</td>
     <td>${element.attributes.Recovered}</td>
   </tr>`
-  )
-}
+  );
+};
