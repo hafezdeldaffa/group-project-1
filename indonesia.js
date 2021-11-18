@@ -11,7 +11,7 @@ const getApiIndonesia = async () => {
 
 const getApiProvince = async () => {
   try {
-    const posts = await fetch('https://api.kawalcorona.com/indonesia/provinsi');
+    const posts = await fetch('https://apicovid19indonesia-v2.vercel.app/api/indonesia/provinsi');
     return posts.json();
   } catch (error) {
     console.log('getPosts', error);
@@ -21,11 +21,13 @@ const getApiProvince = async () => {
 
 const renderData = async () => {
   const getDataIndo = await getApiIndonesia();
+  console.log(getDataIndo)
   const data = Object.entries(getDataIndo[0]);
 
   const getDataProvince = await getApiProvince();
   console.log(getDataProvince)
-  const dataProvince = Object.entries(getDataProvince);
+  const dataProvince = getDataProvince;
+  console.log(dataProvince)
   let i = 0;
 
   //title table
@@ -42,7 +44,8 @@ const renderData = async () => {
       <th scope="col">No</th>
       <th scope="col">Provinsi</th>
       <th scope="col">Meninggal</th>
-      <th scope="col">Positif</th>
+      <th scope="col">dirawat</th>
+      <th scope="col">Sembuh Meninggal</th>
       <th scope="col">Sembuh</th>
     </tr>
   </thead>`
@@ -56,6 +59,11 @@ const renderData = async () => {
     i = i + 1
     createElementProvince(element,i)
   });
+
+
+  const modalSearch = document.getElementById("exampleModal")
+  console.log(modalSearch)
+
 }
 
 renderData()
@@ -95,10 +103,11 @@ const createElementProvince = (element,i) =>{
     'beforeend',
     `<tr>
     <th scope="row">${i}</th>
-    <td>${element[1].attributes.Provinsi}</td>
-    <td>${element[1].attributes.Kasus_Meni}</td>
-    <td>${element[1].attributes.Kasus_Posi}</td>
-    <td>${element[1].attributes.Kasus_Semb}</td>
+    <td>${element.provinsi}</td>
+    <td>${element.kasus}</td>
+    <td>${element.dirawat}</td>
+    <td>${element.sembuh}</td>
+    <td>${element.meninggal}</td>
   </tr>`
   )
 }
