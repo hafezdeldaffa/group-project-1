@@ -64,12 +64,6 @@ const renderData = async () => {
   const modalSearch = document.getElementById("exampleModal")
   console.log(modalSearch)
 
-  // modalSearch.addEventListener("click", (event) =>{
-  //   event.preventDefault();
-  //   dataProvince.forEach(element =>{
-  //     console.log(element[1])
-  //   })
-  // })
 }
 
 renderData()
